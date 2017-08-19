@@ -1,0 +1,18 @@
+MyIrc Concepts
+==============
+
+In this documents I am just writing down some notes why I did something
+in the way I actually did it.
+
+
+1. Neitzel.MyIrc.Lib
+====================
+
+1.1. Use of Delegates / Events
+The IRCMessageEvaluator is calling an Event for each Message that I
+receive. That way the Client can simply add his routines wherever needed.
+So for example it could also be possible that a script adds itself there,
+too. So the idea is to give these basics directly in the lib so that the
+different Clients can do all on their own at that point.
+
+
