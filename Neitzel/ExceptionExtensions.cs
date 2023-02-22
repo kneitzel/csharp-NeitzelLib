@@ -20,11 +20,16 @@ namespace Neitzel
         public static string GetFullMessage(this Exception exception)
         {
             // Validate parameter
-            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (exception == null)
+            {
+                throw new ArgumentNullException(nameof(exception));
+            }
 
             // Message with inner exception
             if (exception.InnerException == null)
+            {
                 return string.Format(CultureInfo.InvariantCulture, "{0} {1}", exception.Message, exception.StackTrace);
+            }
 
             // Message without inner exception
             return string.Format(CultureInfo.InvariantCulture, "{0} {1} ({2})", exception.Message, exception.StackTrace, exception.InnerException.GetFullMessage());

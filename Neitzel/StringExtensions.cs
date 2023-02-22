@@ -3,6 +3,8 @@ using System.Linq;
 
 namespace Neitzel
 {
+    using System.Diagnostics.Contracts;
+
     /// <summary>
     /// Usefull extensions to the String class.
     /// </summary>
@@ -17,8 +19,8 @@ namespace Neitzel
         public static bool Contains(this string source, char[] characters)
         {
             // validate
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (characters == null) throw new ArgumentNullException(nameof(characters));
+            Contract.Requires<ArgumentNullException>(source != null, nameof(source));
+            Contract.Requires<ArgumentNullException>(characters != null, nameof(characters));
 
             return characters.Any(source.Contains);
         }
@@ -32,16 +34,17 @@ namespace Neitzel
         public static int FirstIndexOf(this string source, char[] characters)
         {
             // validate
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (characters == null) throw new ArgumentNullException(nameof(characters));
+            Contract.Requires<ArgumentNullException>(source != null, nameof(source));
+            Contract.Requires<ArgumentNullException>(characters != null, nameof(characters));
 
             var first = int.MaxValue;
             foreach (var ch in characters)
             {
                 var cur = source.IndexOf(ch);
                 if (cur != -1 && cur < first)
+                {
                     first = cur;
-
+                }
             }
 
             return (first == int.MaxValue) ? -1 : first;
